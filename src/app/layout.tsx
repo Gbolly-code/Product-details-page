@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
+import { Header } from "@/components/ui/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +27,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
-        {children}
+        {/* Announcement bar */}
+        <div className="w-full bg-zinc-900 text-white">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2 text-sm">
+            <div>
+              New season coming! Discount 10% for all product!{' '}
+              <a href="#" className="underline">Checkout Now!</a>
+            </div>
+            <a href="#" className="text-xs opacity-80 hover:opacity-100">20:40</a>
+          </div>
+        </div>
+        <Header />
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
