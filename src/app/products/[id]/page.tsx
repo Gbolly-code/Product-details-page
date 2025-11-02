@@ -10,13 +10,27 @@ import { Button } from "@/components/ui/button";
 import { Swatch } from "@/components/ui/swatch";
 import { SizeSelector } from "@/components/ui/size-selector";
 
+function IconChevronRight({ className }: { className?: string }) {
+	return (
+		<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden className={className}>
+			<polyline points="9 18 15 12 9 6" />
+		</svg>
+	);
+}
+
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
 	// Pure placeholder version — no API usage
 	const [active, setActive] = React.useState(0);
-	// Placeholder gallery using Picsum: one main + additional variants
-	const picsumPlaceholders = Array.from({ length: 6 }, (_, i) => `https://picsum.photos/seed/overshirt-${i}/800/1000`);
+	// Local images from assets folder
+	const images = [
+		"/assets/asset1.jpg",
+		"/assets/asset2.jpg",
+		"/assets/asset3.jpg",
+		"/assets/asset4.jpg",
+		"/assets/asset5.jpg",
+		"/assets/asset6.jpg"
+	];
 
-	const images = picsumPlaceholders;
 	const thumbs = images.slice(0, 5);
 	const colorOptions = ["#A67C52", "#E5E7EB", "#1E6AAE", "#000000"]; // light brown, light gray, blue, black
 	const sizeOptions = ["6", "8", "10", "14", "18", "20"];
@@ -24,53 +38,53 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     const [selectedColor, setSelectedColor] = React.useState<string>(colorOptions[0]);
 	return (
 		<div className="mx-auto max-w-6xl px-4 py-8">
-			{/* Breadcrumbs (simple) */}
-			<nav className="mb-6 text-sm">
-				<div className="flex flex-wrap items-center gap-2">
-					<Link href="/" className="text-zinc-500 hover:underline">Homepage</Link>
-					<span className="text-zinc-400">&gt;</span>
-					<Link href="#" className="text-zinc-500 hover:underline">Women</Link>
-					<span className="text-zinc-400">&gt;</span>
-					<Link href="/products" className="text-zinc-500 hover:underline">Women’s Shirts & Tops</Link>
+		{/* Breadcrumbs (simple) */}
+		<nav className="mb-6 text-xl md:text-sm">
+			<div className="flex flex-wrap items-center gap-4 sm:gap-4 md:gap-2">
+				<Link href="/" className="text-zinc-500 hover:underline">Homepage</Link>
+				<IconChevronRight className="text-zinc-400" />
+				<Link href="#" className="text-zinc-500 hover:underline">Women</Link>
+				<IconChevronRight className="text-zinc-400" />
+				<Link href="/products" className="text-zinc-500 hover:underline">Women's Shirts & Tops</Link>
+                <IconChevronRight className="text-zinc-400" />
 
-				</div>
+			</div>
 				{/* Second line: chevron + dark title */}
 				<div className="mt-1 flex items-center gap-2">
-					<span className="text-zinc-400">&gt;</span>
 					<span className="text-zinc-900">Long Sleeve Overshirt, Khaki, 6</span>
 				</div>
 			</nav>
 
-			<div className="grid grid-cols-1 gap-12 sm:gap-12 md:grid-cols-2 md:gap-16">
+			<div className="grid grid-cols-1 gap-12 sm:gap-12 md:grid-cols-2 md:gap-8 lg:gap-12">
 				{/* Gallery */}
-                <div className="relative space-y-7 pr-18 sm:pl-8 md:pr-16 lg:pr-24">
-                    <div className="relative h-130 sm:h-96 md:h-[500px] lg:h-[560px] w-12/12 md:w-full mx-auto overflow-hidden rounded-lg bg-zinc-50">
-						{/* Main image */}
-						<Image src={images[active]} alt="Product image" fill sizes="(max-width:400px) 80vw, 20vw" className="object-cover" />
+                <div className="relative space-y-6 md:space-y-7 md:pr-16 lg:pr-24">
+                    <div className="flex gap-6 items-start">
+                        <div className="relative h-[520px] sm:h-[520px] md:h-[500px] lg:h-[560px] w-full mx-auto rounded-lg bg-zinc-50 overflow-hidden">
+                            {/* Main image */}
+                            <Image src={images[active]} alt="Product image" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                        </div>
 
-						{/* Carousel arrows moved outside (see below) */}
-					</div>
-
-					{/* Right vertical actions (share/heart) OUTSIDE the image */}
-                    <div className="pointer-events-auto absolute right-2 sm:right-3 md:right-4 lg:right-6 top-2 sm:top-3 md:top-4 flex flex-col gap-7">
-						<button aria-label="Share" className="rounded-md bg-zinc-100 p-2 shadow">
-							<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-						</button>
-						<button aria-label="Wishlist" className="rounded-md bg-zinc-100 p-2 shadow">
-							<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
-						</button>
-					</div>
-
-					{/* Bottom-right stacked carousel arrows OUTSIDE the image */}
-                    <div className="pointer-events-auto absolute right-2 sm:right-3 md:right-4 lg:right-6 bottom-28 sm:bottom-3 md:bottom-4 lg:bottom-18 flex flex-col gap-3">
-						<button onClick={() => setActive((a)=> (a-1+images.length)%images.length)} aria-label="Prev" className="rounded-md bg-zinc-100 p-2 shadow">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-						</button>
-						<button onClick={() => setActive((a)=> (a+1)%images.length)} aria-label="Next" className="rounded-md bg-zinc-100 p-2 shadow">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-						</button>
-					</div>
-                    <div className="grid grid-cols-5 gap-3 ml-auto pr-1 sm:mx-auto sm:pr-0 sm:gap-3 md:gap-4">
+                        {/* Right vertical actions (share/heart + carousel) */}
+                        <div className="pointer-events-auto flex flex-col gap-76 md:gap-72 lg:gap-86">
+                            <div className="flex flex-col gap-5">
+                                <button aria-label="Share" className="rounded-md bg-zinc-100 p-2 shadow">
+                                    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                                </button>
+                                <button aria-label="Wishlist" className="rounded-md bg-zinc-100 p-2 shadow">
+                                    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                </button>
+                            </div>
+                            <div className="flex flex-col gap-5">
+                                <button onClick={() => setActive((a)=> (a-1+images.length)%images.length)} aria-label="Prev" className="rounded-md bg-zinc-100 p-2 shadow">
+                                    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                                </button>
+                                <button onClick={() => setActive((a)=> (a+1)%images.length)} aria-label="Next" className="rounded-md bg-zinc-100 p-2 shadow">
+                                    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-5 gap-3 md:mx-auto md:gap-4">
 						{thumbs.map((src, i) => (
 							<button key={i} onClick={() => setActive(i)} className={["relative aspect-square overflow-hidden rounded border", i===active?"border-zinc-900":"border-zinc-200"].join(" ")}> 
 								<Image src={src} alt={`Thumb ${i+1}`} fill className="object-cover" />
@@ -82,27 +96,27 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 				{/* Info */}
 				<div className="space-y-4 md:flex md:h-full md:flex-col md:justify-between">
                     <div className="space-y-4">
-                        <div className="text-sm text-zinc-500">John Lewis ANYDAY</div>
-                        <h1 className="text-3xl md:text-3xl font-semibold">Long Sleeve Overshirt, Khaki, 6</h1>
+                        <div className="text-base md:text-sm text-zinc-500">John Lewis ANYDAY</div>
+                        <h1 className="text-4xl md:text-3xl font-semibold">Long Sleeve Overshirt, Khaki, 6</h1>
                         <div className="flex items-center justify-between">
                             <div className="inline-block">
                                 <div className="flex items-baseline gap-3">
-                                    <span className="text-base md:text-lg text-zinc-400 line-through">£45.00</span>
-                                    <span className="text-xl md:text-2xl"><Price amount={28} currency="GBP" /></span>
+                                    <span className="text-lg md:text-lg text-zinc-400 line-through">£45.00</span>
+                                    <span className="text-2xl md:text-2xl"><Price amount={28} currency="GBP" /></span>
                                 </div>
                                 <div className="hidden md:block mt-2 border-t border-dashed border-zinc-300" />
                             </div>
                             <div className="flex items-center gap-3">
-                                <span className="text-base md:text-lg text-zinc-500">1,238 Sold</span>
+                                <span className="text-lg md:text-lg text-zinc-500">1,238 Sold</span>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-500" aria-hidden>
                                     <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                                 </svg>
-                                <span className="font-semibold">4.5</span>
+                                <span className="text-lg md:text-base font-semibold">4.5</span>
                             </div>
                         </div>
                         <div className="space-y-1">
-                            <div className="text-sm font-semibold text-zinc-900">Description:</div>
-                            <p className="text-sm leading-6 text-zinc-600">
+                            <div className="text-base md:text-sm font-semibold text-zinc-900">Description:</div>
+                            <p className="text-lg md:text-sm lg:text-lg leading-6 text-zinc-600">
                                 Boba etiam ut bulla tea est potus dilectus singulari coniunctione saporum et textuum, quae in Taiwan annis 1980 orta sunt. Boba refert ad pilas masticas tapiocas in fundo potus inventas, quae typice lacte tea nigro sapiuntur; Boba phaenomenon.
                                 <span className="ml-1 font-bold text-zinc-900">See More...</span>
                             </p>
@@ -110,7 +124,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
                         {/* Color */}
                         <div className="space-y-2 md:mt-6 lg:mt-8">
-                            <div className="text-base font-medium text-zinc-700">Color: <span className="text-lg font-bold text-zinc-900">Royal Brown</span></div>
+                            <div className="text-lg md:text-base font-medium text-zinc-700">Color: <span className="text-xl md:text-lg font-bold text-zinc-900">Royal Brown</span></div>
                             <div className="grid w-full grid-cols-4 gap-1 md:gap-2 md:flex md:grid-cols-none">
                                 {colorOptions.map((c) => (
                                     <Swatch key={c} value={c} selected={selectedColor === c} onSelect={setSelectedColor} />
@@ -121,8 +135,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                         {/* Size */}
                         <div className="space-y-2 md:mt-6 lg:mt-8">
                             <div className="flex items-center justify-between">
-                                <span className="text-base font-medium text-zinc-700">Size: <span className="text-lg font-bold text-zinc-900">{selectedSize}</span></span>
-                                <Link href="#" className="text-sm underline">View Size Chart</Link>
+                                <span className="text-lg md:text-base font-medium text-zinc-700">Size: <span className="text-xl md:text-lg font-bold text-zinc-900">{selectedSize}</span></span>
+                                <Link href="#" className="text-base md:text-sm underline">View Size Chart</Link>
                             </div>
                             <SizeSelector values={sizeOptions} selected={selectedSize} onSelect={setSelectedSize} />
                         </div>
@@ -130,8 +144,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
                     {/* Bottom: CTA and T&C aligned to baseline on desktop */}
                     <div className="mt-3 md:mt-0">
-                        <div className="flex w/full flex-col gap-3 md:w-auto md:flex-row md:items-center">
-                            <div className="w-2/3 md:w-full md:flex md:flex-col md:gap-2">
+                        <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-center">
+                            <div className="w-full md:w-full md:flex md:flex-col md:gap-2">
                                 {/* Buttons row: side-by-side on desktop */}
                                 <div className="md:flex md:items-center md:gap-3">
                                     <Button
@@ -143,7 +157,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                                     </Button>
                                     <Link
                                         href="#"
-                                        className="mb-10 inline-flex h-14 md:h-14 w-2/3 md:w-auto md:flex-[0.45] items-center justify-center rounded-md border border-zinc-300 bg-white px-6 text-lg md:text-sm font-semibold md:font-medium text-black transition hover:bg-zinc-50 md:mt-0"
+                                        className="mb-10 inline-flex h-14 md:h-14 w-full md:w-auto md:flex-[0.45] items-center justify-center rounded-md border border-zinc-300 bg-white px-6 text-lg md:text-sm font-semibold md:font-medium text-black transition hover:bg-zinc-50 md:mt-0"
                                     >
                                         Checkout Now
                                     </Link>
@@ -218,7 +232,7 @@ function RelatedProducts({ currentId }: { currentId: string }) {
             </div>
         </div>
     );
-}
+}   
 
 function ProductReviews() {
     const rows = [

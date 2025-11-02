@@ -59,9 +59,18 @@ export class ApiClient {
             const imagesFromApi: string[] = Array.isArray(r.images) ? r.images : [];
             const thumbnailFromApi: string | undefined = r.thumbnail || r.image || undefined;
 
-            // Seeded placeholder to ensure every product has an image
-            const seed = encodeURIComponent(id || title);
-            const placeholder = `https://picsum.photos/seed/${seed}/800/1000`;
+            // Local images to ensure every product has an image
+            const localImages = [
+                "/assets/asset1.jpg",
+                "/assets/asset2.jpg",
+                "/assets/asset3.jpg",
+                "/assets/asset4.jpg",
+                "/assets/asset5.jpg",
+                "/assets/asset6.jpg"
+            ];
+            // Use hash of id/title to consistently assign an image per product
+            const hash = (id || title).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            const placeholder = localImages[hash % localImages.length];
 
             const images: string[] = imagesFromApi.length ? imagesFromApi : (thumbnailFromApi ? [thumbnailFromApi] : [placeholder]);
             const thumbnail: string | undefined = thumbnailFromApi || images[0] || placeholder;

@@ -31,12 +31,14 @@ export default function RootLayout({
       >
         {/* Announcement bar */}
         <div className="w-full bg-zinc-900 text-white">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2 text-sm">
-            <div>
-              New season coming! Discount 10% for all product!{' '}
-              <a href="#" className="underline">Checkout Now!</a>
+          <div className="mx-auto flex flex-col sm:flex-col lg:flex-row max-w-6xl items-center justify-center px-4 py-2 gap-1 sm:gap-2">
+            <div className="text-lg sm:text-lg">
+              New season coming! Discount 10%
             </div>
-            <a href="#" className="text-xs opacity-80 hover:opacity-100">20:40</a>
+            <div className="flex items-center gap-2 text-lg sm:text-lg">
+              for all product! Checkout Now!
+              <button className="bg-zinc-700 px-3 py-1 rounded-full text-sm">20:40</button>
+            </div>
           </div>
         </div>
         <Header />
