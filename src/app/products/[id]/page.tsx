@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { useProducts } from "@/hooks/use-products";
+import { useCart } from "@/context/cart-context";
+import { Product } from "@/types";
 import { Footer } from "@/components/ui/footer";
 import { Price } from "@/components/ui/price";
 import { Rating } from "@/components/ui/rating";
@@ -21,6 +23,7 @@ function IconChevronRight({ className }: { className?: string }) {
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
 	// Pure placeholder version — no API usage
 	const [active, setActive] = React.useState(0);
+	const { add } = useCart();
 	// Local images from assets folder
 	const images = [
 		"/assets/asset1.jpg",
@@ -36,6 +39,24 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 	const sizeOptions = ["6", "8", "10", "14", "18", "20"];
 	const [selectedSize, setSelectedSize] = React.useState("8");
     const [selectedColor, setSelectedColor] = React.useState<string>(colorOptions[0]);
+
+	// Create product object for cart
+	const productData: Product = {
+		id: params.id,
+		title: "Long Sleeve Overshirt, Khaki, 6",
+		description: "Boba etiam ut bulla tea est potus dilectus singulari coniunctione saporum et textuum, quae in Taiwan annis 1980 orta sunt. Boba refert ad pilas masticas tapiocas in fundo potus inventas, quae typice lacte tea nigro sapiuntur; Boba phaenomenon.",
+		price: 28,
+		currency: "GBP",
+		images: images,
+		thumbnail: images[0],
+		rating: 4.5,
+		stock: 1238
+	};
+
+	const handleAddToCart = () => {
+		add(productData, 1);
+		alert("Product added to cart!");
+	};
 	return (
 		<div className="mx-auto max-w-6xl px-4 py-8">
 		{/* Breadcrumbs (simple) */}
@@ -152,12 +173,13 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                                         variant="primary"
                                         className="w-full mb-10 md:w-auto md:flex-[0.55] h-16 md:h-14 text-xl md:text-base font-bold"
                                         style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                                        onClick={handleAddToCart}
                                     >
                                         Add To Cart
                                     </Button>
                                     <Link
                                         href="#"
-                                        className="mb-10 inline-flex h-14 md:h-14 w-full md:w-auto md:flex-[0.45] items-center justify-center rounded-md border border-zinc-300 bg-white px-6 text-lg md:text-sm font-semibold md:font-medium text-black transition hover:bg-zinc-50 md:mt-0"
+                                        className="mb-10 inline-flex h-14 md:h-14 w-[66.666667%] md:w-auto md:flex-[0.45] items-center justify-center rounded-md border border-zinc-300 bg-white px-6 text-lg md:text-sm font-semibold md:font-medium text-black transition hover:bg-zinc-50 md:mt-0"
                                     >
                                         Checkout Now
                                     </Link>
