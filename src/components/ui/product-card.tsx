@@ -15,13 +15,13 @@ export function ProductCard({ product }: { product: Product }) {
 					<div className="flex h-full w-full items-center justify-center text-zinc-400">No Image</div>
 				)}
 			</div>
-			<div className="space-y-1 p-3">
-				<div className="line-clamp-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">{product.title}</div>
-				<div className="flex items-center justify-between">
-					<Price amount={product.price} currency={product.currency || "USD"} />
-					<Rating value={product.rating} />
-				</div>
+		<div className="space-y-1 p-3">
+			<div className="line-clamp-1 text-lg md:text-lg lg:text-xl font-semibold text-zinc-900 dark:text-zinc-100">{product.title}</div>
+			<div className="flex items-center justify-between text-base md:text-base lg:text-lg">
+				<Price amount={product.price} currency={product.currency || "USD"} />
+				<Rating value={product.rating} />
 			</div>
+		</div>
 		</Link>
 	);
 }

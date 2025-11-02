@@ -200,8 +200,8 @@ function RelatedProducts({ currentId }: { currentId: string }) {
     return (
         <div className="mx-auto w-full">
             <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Related Products</h2>
-                <Link href="/products" className="text-sm underline">View all</Link>
+                <h2 className="text-3xl font-bold">Related Products</h2>
+                <Link href="/products" className="text-lg underline">View all</Link>
             </div>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
                 {items.map((p) => {
@@ -216,10 +216,10 @@ function RelatedProducts({ currentId }: { currentId: string }) {
 					)}
 				</div>
                             <div className="space-y-1 p-3">
-                                <div className="line-clamp-2 text-sm text-zinc-700">{p.title}</div>
-                                <Price amount={typeof p.price === "number" ? p.price : 0} currency={p.currency || "USD"} />
-                                <div className="flex items-center gap-2 text-xs text-zinc-700">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-500" aria-hidden>
+                                <div className="line-clamp-2 text-lg md:text-lg lg:text-xl font-semibold text-zinc-700">{p.title}</div>
+                                <Price className="sm:text-xl" amount={typeof p.price === "number" ? p.price : 0} currency={p.currency || "USD"} />
+                                <div className="flex items-center gap-2 text-base md:text-base lg:text-lg text-zinc-700">
+                                    <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-yellow-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                                         <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                                     </svg>
                                     <span className="font-semibold">4.8</span>
@@ -244,39 +244,39 @@ function ProductReviews() {
     ];
     return (
         <div className="mx-auto w-full">
-            <h2 className="mb-4 text-lg font-semibold">Product Reviews</h2>
+            <h2 className="mb-4 text-3xl font-bold">Product Reviews</h2>
             <div className="rounded-lg border border-dashed border-zinc-300 p-4 md:p-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:items-center">
                     {/* Left: score + stars */}
                     <div className="flex items-center gap-4">
                         {/* Partial ring with centered score */}
-                        <div className="relative h-16 w-16">
+                        <div className="relative h-20 w-20 md:h-24 md:w-24 lg:h-28 lg:w-28">
                             <svg viewBox="0 0 36 36" className="h-full w-full rotate-[10deg]">
                                 <circle cx="18" cy="18" r="16" fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="90 100" strokeLinecap="round" />
                             </svg>
-                            <div className="absolute inset-0 flex items-center justify-center text-xl font-semibold text-zinc-900">4.8</div>
+                            <div className="absolute inset-0 flex items-center justify-center text-2xl md:text-3xl lg:text-4xl font-semibold text-zinc-900">4.8</div>
                         </div>
                         <div className="space-y-1">
                             <div className="flex items-center gap-1 text-amber-400">
                                 {Array.from({ length: 5 }).map((_, i) => (
-                                    <svg key={i} width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                    <svg key={i} className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                                         <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                                     </svg>
                                 ))}
                             </div>
-                            <div className="text-sm text-zinc-500">from 1,25k reviews</div>
+                            <div className="text-xl md:text-xl lg:text-2xl text-zinc-500">from 1,25k reviews</div>
                         </div>
                     </div>
 
                     {/* Right: histogram */}
                     <div className="space-y-2">
                         {rows.map((r) => (
-                            <div key={r.label} className="grid grid-cols-[32px_1fr_auto] items-center gap-2 text-lg">
-                                <span className="text-zinc-600">{r.label}</span>
-                                <div className="relative h-2 overflow-hidden rounded bg-zinc-200">
+                            <div key={r.label} className="grid grid-cols-[40px_1fr_auto] md:grid-cols-[50px_1fr_auto] lg:grid-cols-[60px_1fr_auto] items-center gap-2">
+                                <span className="text-lg md:text-xl lg:text-2xl text-zinc-600">{r.label}</span>
+                                <div className="relative h-2 md:h-3 lg:h-4 overflow-hidden rounded bg-zinc-200">
                                     <div className="absolute left-0 top-0 h-full bg-black" style={{ width: `${Math.max(0, Math.min(100, r.ratio * 100))}%` }} />
                                 </div>
-                                <span className="text-zinc-700">{r.value}</span>
+                                <span className="text-lg md:text-xl lg:text-2xl text-zinc-700">{r.value}</span>
                             </div>
                         ))}
                     </div>
@@ -301,17 +301,17 @@ function ReviewsList() {
             <div className="grid grid-cols-1 gap-8 md:grid-cols-[260px_1fr]">
                 {/* Left: Filters (desktop only visual) */}
                 <aside className="hidden self-start rounded-md border border-dashed border-zinc-300 p-5 md:block">
-                    <div className="mb-4 text-lg font-semibold">Reviews Filter</div>
-                    <div className="space-y-6 text-sm">
+                    <div className="mb-4 text-xl md:text-xl lg:text-2xl font-semibold">Reviews Filter</div>
+                    <div className="space-y-6 text-base md:text-base lg:text-lg">
                         <div>
-                            <div className="mb-2 text-lg font-semibold text-zinc-900">Rating</div>
+                            <div className="mb-2 text-lg md:text-xl lg:text-2xl font-semibold text-zinc-900">Rating</div>
                             <div className="space-y-2">
                                 {[5,4,3,2,1].map((r)=> (
                                     <label key={r} className="flex items-center gap-3">
-                                        <input type="checkbox" className="h-4 w-4" />
+                                        <input type="checkbox" className="h-5 w-5 md:h-6 md:w-6" />
                                         <span className="flex items-center gap-1">
                                             {r}
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-amber-400" aria-hidden>
+                                            <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                                                 <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                                             </svg>
                                         </span>
@@ -323,11 +323,11 @@ function ReviewsList() {
                         <div className="border-t border-dashed border-zinc-300" />
 
                         <div>
-                            <div className="mb-2 text-lg font-semibold text-zinc-900">Review Topics</div>
+                            <div className="mb-2 text-lg md:text-xl lg:text-2xl font-semibold text-zinc-900">Review Topics</div>
                             <div className="space-y-2 text-zinc-500">
                                 {['Product Quality','Seller Services','Product Price','Shipment','Match with Description'].map((t)=> (
                                     <label key={t} className="flex items-center gap-3">
-                                        <input type="checkbox" className="h-4 w-4" />
+                                        <input type="checkbox" className="h-5 w-5 md:h-6 md:w-6" />
                                         <span>{t}</span>
                                     </label>
                                 ))}
@@ -340,13 +340,13 @@ function ReviewsList() {
                 <div>
                     {/* Desktop heading + filters directly above the first review */}
                     <div className="hidden md:block">
-                        <div className="mb-2 font-medium">Review Lists</div>
+                        <div className="mb-2 text-lg md:text-xl lg:text-2xl font-medium">Review Lists</div>
                         <div className="mb-4 flex flex-wrap items-center gap-2">
-                            <button className="rounded-md border border-zinc-300 bg-zinc-200 px-3 py-2 text-sm">All Reviews</button>
-                            <button className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm">With Photo & Video</button>
-                            <button className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm">With Description</button>
-                            <button className="ml-auto rounded-md border border-zinc-300 bg-white p-2 text-sm">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                            <button className="rounded-md border border-zinc-300 bg-zinc-200 px-3 py-2 text-base md:text-base lg:text-lg">All Reviews</button>
+                            <button className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-base md:text-base lg:text-lg">With Photo & Video</button>
+                            <button className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-base md:text-base lg:text-lg">With Description</button>
+                            <button className="ml-auto rounded-md border border-zinc-300 bg-white p-2">
+                                <svg className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                                     <polygon points="22 3 2 3 10 12 10 19 14 21 14 12 22 3" />
                                 </svg>
                             </button>
@@ -359,29 +359,29 @@ function ReviewsList() {
                                 {/* Stars */}
                                 <div className="mb-2 flex items-center gap-1 text-amber-400">
                                     {Array.from({ length: 5 }).map((_, i) => (
-                                        <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                        <svg key={i} className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                                             <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                                         </svg>
                                     ))}
                                 </div>
                                 {/* Text */}
-                                <div className="mb-1 font-semibold">This is amazing product I have.</div>
-                                <div className="mb-3 text-xs text-zinc-500">{it.date}</div>
+                                <div className="mb-1 text-base md:text-lg lg:text-xl font-semibold">This is amazing product I have.</div>
+                                <div className="mb-3 text-sm md:text-base lg:text-lg text-zinc-500">{it.date}</div>
                                 {/* User and actions */}
 					<div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-2 text-sm text-zinc-700">
-                                        <div className="h-6 w-6 rounded-full bg-zinc-300" />
+                                    <div className="flex items-center gap-2 text-base md:text-lg lg:text-xl text-zinc-700">
+                                        <div className="h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 rounded-full bg-zinc-300" />
                                         <span>{it.user}</span>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <button className="inline-flex items-center gap-1 rounded-md border border-zinc-300 bg-white px-2 py-1 text-xs">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                                        <button className="inline-flex items-center gap-1 rounded-md border border-zinc-300 bg-white px-2 py-1 text-sm md:text-base lg:text-lg">
+                                            <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                                                 <path d="M14 9V5a3 3 0 0 0-3-3l-4 8v11h10a3 3 0 0 0 3-3v-7z" />
                                             </svg>
                                             {it.likes}
                                         </button>
-                                        <button className="inline-flex items-center gap-1 rounded-md border border-zinc-300 bg-white px-2 py-1 text-xs">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                                        <button className="inline-flex items-center gap-1 rounded-md border border-zinc-300 bg-white px-2 py-1">
+                                            <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                                                 <path d="M10 15v4a3 3 0 0 0 3 3l4-8V3H7a3 3 0 0 0-3 3v7z" />
                                             </svg>
                                         </button>
@@ -395,7 +395,7 @@ function ReviewsList() {
                     <div className="mt-6 flex items-center justify-center gap-2">
                         {[1,2,'…',19].map((p, idx) => (
                             <button key={idx} className={[
-                                "h-8 w-8 rounded border",
+                                "h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded border text-base md:text-lg lg:text-xl",
                                 p===1?"border-zinc-900 bg-black text-white":"border-zinc-300 bg-white"
                             ].join(" ")}>{p}</button>
                         ))}
@@ -416,8 +416,8 @@ function PopularThisWeek() {
     return (
         <div className="mx-auto w-full">
             <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Popular this week</h2>
-                <Link href="/products" className="text-sm underline">View all</Link>
+                <h2 className="text-3xl font-bold">Popular this week</h2>
+                <Link href="/products" className="text-lg underline">View all</Link>
             </div>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
                 {items.map((p) => {
@@ -432,10 +432,10 @@ function PopularThisWeek() {
                                 )}
                             </div>
                             <div className="space-y-1 p-3">
-                                <div className="line-clamp-2 text-sm text-zinc-700">{p.title}</div>
-                                <Price amount={typeof p.price === "number" ? p.price : 0} currency={p.currency || "USD"} />
-                                <div className="flex items-center gap-2 text-xs text-zinc-700">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-500" aria-hidden>
+                                <div className="line-clamp-2 text-lg md:text-lg lg:text-xl font-semibold text-zinc-700">{p.title}</div>
+                                <Price className="sm:text-xl" amount={typeof p.price === "number" ? p.price : 0} currency={p.currency || "USD"} />
+                                <div className="flex items-center gap-2 text-base md:text-base lg:text-lg text-zinc-700">
+                                    <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-yellow-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                                         <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                                     </svg>
                                     <span className="font-semibold">4.8</span>
