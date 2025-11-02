@@ -1,16 +1,8 @@
 import { ApiListResponse, Product } from "@/types";
 
-const DEFAULT_BASE_URL = "https://frontendcodingtest-production.up.railway.app";
-
 export class ApiClient {
-    private baseUrl: string;
-
-    constructor(baseUrl: string = DEFAULT_BASE_URL) {
-        this.baseUrl = baseUrl.replace(/\/$/, "");
-    }
-
     private async http<T>(path: string, init?: RequestInit): Promise<T> {
-        const url = `${this.baseUrl}${path}`;
+        const url = path;
         const res = await fetch(url, {
             ...init,
             headers: {
@@ -38,7 +30,7 @@ export class ApiClient {
         if (params?.search) query.set("search", params.search);
         if (params?.categoryId) query.set("categoryId", params.categoryId);
         const q = query.toString();
-        // Railway API exposes endpoints under /api
+        // Use Next.js API route proxy to avoid CORS issues
         const json = await this.http<any>(`/api/products${q ? `?${q}` : ""}`);
         // Normalize possible shapes
         const rawList = Array.isArray(json?.items)
@@ -89,6 +81,6 @@ export class ApiClient {
     }
 }
 
-export const api = new ApiClient(DEFAULT_BASE_URL);
+export const api = new ApiClient();
 
 

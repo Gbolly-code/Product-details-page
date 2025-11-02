@@ -59,24 +59,24 @@ export default function Home() {
 		add(productData, 1);
 		alert("Product added to cart!");
 	};
-	return (
-		<div className="mx-auto max-w-6xl px-4 py-8">
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-8">
 		{/* Breadcrumbs (simple) */}
 		<nav className="mb-6 text-xl md:text-sm">
 			<div className="flex flex-wrap items-center gap-4 sm:gap-4 md:gap-2">
-				<Link href="/" className="text-zinc-500 hover:underline">Homepage</Link>
+          <Link href="/" className="text-zinc-500 hover:underline">Homepage</Link>
 				<IconChevronRight className="text-zinc-400" />
 				<Link href="#" className="text-zinc-500 hover:underline">Women</Link>
 				<IconChevronRight className="text-zinc-400" />
 				<Link href="/products" className="text-zinc-500 hover:underline">Women's Shirts & Tops</Link>
                 <IconChevronRight className="text-zinc-400" />
 
-			</div>
+        </div>
 				{/* Second line: chevron + dark title */}
-				<div className="mt-1 flex items-center gap-2">
+          <div className="mt-1 flex items-center gap-2">
 					<span className="text-zinc-900">Long Sleeve Overshirt, Khaki, 6</span>
-				</div>
-			</nav>
+          </div>
+      </nav>
 
 			<div className="grid grid-cols-1 gap-12 sm:gap-12 md:grid-cols-2 md:gap-8 lg:gap-12">
 				{/* Gallery */}
@@ -235,9 +235,9 @@ function RelatedProducts({ currentId }: { currentId: string }) {
                             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-zinc-50">
                                 {img ? (
                                     <Image src={img} alt={p.title} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" className="object-cover transition-transform duration-300 group-hover:scale-105" />
-				) : (
-					<div className="flex h-full w-full items-center justify-center text-zinc-400">No Image</div>
-				)}
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-zinc-400">No Image</div>
+            )}
 			</div>
                             <div className="space-y-1 p-3">
                                 <div className="line-clamp-2 text-lg md:text-lg lg:text-xl font-semibold text-zinc-700">{p.title}</div>
@@ -289,8 +289,8 @@ function ProductReviews() {
                                 ))}
                             </div>
                             <div className="text-xl md:text-xl lg:text-2xl text-zinc-500">from 1,25k reviews</div>
-                        </div>
-                    </div>
+          </div>
+        </div>
 
                     {/* Right: histogram */}
                     <div className="space-y-2">
@@ -299,13 +299,13 @@ function ProductReviews() {
                                 <span className="text-lg md:text-xl lg:text-2xl text-zinc-600">{r.label}</span>
                                 <div className="relative h-2 md:h-3 lg:h-4 overflow-hidden rounded bg-zinc-200">
                                     <div className="absolute left-0 top-0 h-full bg-black" style={{ width: `${Math.max(0, Math.min(100, r.ratio * 100))}%` }} />
-                                </div>
+              </div>
                                 <span className="text-lg md:text-xl lg:text-2xl text-zinc-700">{r.value}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
             </div>
+                        ))}
+          </div>
+        </div>
+      </div>
 
             {/* Review Lists filters moved to the list column below */}
         </div>
@@ -470,6 +470,6 @@ function PopularThisWeek() {
                     );
                 })}
 		</div>
-        </div>
-    );
+    </div>
+  );
 }
